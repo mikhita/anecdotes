@@ -26,14 +26,28 @@ export const voteAnecdoteOf = (id) => {
   }
 }
 
+export const createAnecdote = (content) => {
+  return{
+    type: 'NEW_ANECDOTE',
+    payload: {
+      content,
+      votes: getId(),
+      id: getId()
+    }
+  }
+
+}
+
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+    case 'NEW_ANECDOTE' : 
+      return [ ...state, action.payload ]
     case 'VOTE_ANECDOTE':
       const id = action.payload.id
       const anecdoteToVote = state.find(a => a.id === id)
       const changedAnecdote = {
         ...anecdoteToVote,
-        votes: anecdoteToVote.votes + 1
+        votes: Number(anecdoteToVote.votes) + 1
       }
       return state.map(anecdote => anecdote.id !== id ? anecdote : changedAnecdote)
     default:

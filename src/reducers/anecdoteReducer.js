@@ -66,7 +66,7 @@ export const createAnecdote = (content) => {
 
 }
 
-const reducer = (state = initialState, action) => {
+const anecdotReducer = (state = initialState, action) => {
   switch(action.type) {
     case 'NEW_ANECDOTE' : 
       return [ ...state, action.payload ]
@@ -83,4 +83,4 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-export default reducer
+export default anecdotReducer

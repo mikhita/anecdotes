@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit"
+
 const getId = () => (100000 * Math.random()).toFixed(0)
 
 
@@ -47,40 +49,64 @@ const anecdotesAtStart = [
 const initialState = anecdotesAtStart
 
 
-export const voteAnecdoteOf = (id) => {
-  return {
-    type: 'VOTE_ANECDOTE',
-    payload: { id }
-  }
-}
+// export const voteAnecdoteOf = (id) => {
+//   return {
+//     type: 'VOTE_ANECDOTE',
+//     payload: { id }
+//   }
+// }
 
-export const createAnecdote = (content) => {
-  return{
-    type: 'NEW_ANECDOTE',
-    payload: {
-      content,
-      votes: getId(),
-      id: getId()
-    }
-  }
+// export const createAnecdote = (content) => {
+//   return{
+//     type: 'NEW_ANECDOTE',
+//     payload: {
+//       content,
+//       votes: getId(),
+//       id: getId()
+//     }
+//   }
 
-}
+// }
 
-const anecdotReducer = (state = initialState, action) => {
-  switch(action.type) {
-    case 'NEW_ANECDOTE' : 
-      return [ ...state, action.payload ]
-    case 'VOTE_ANECDOTE':
-      const id = action.payload.id
+// const anecdotReducer = (state = initialState, action) => {
+//   switch(action.type) {
+//     case 'NEW_ANECDOTE' : 
+//       return [ ...state, action.payload ]
+//     case 'VOTE_ANECDOTE':
+//       const id = action.payload.id
+//       const anecdoteToVote = state.find(a => a.id === id)
+//       const changedAnecdote = {
+//         ...anecdoteToVote,
+//         votes: Number(anecdoteToVote.votes) + 1
+//       }
+//       return state.map(anecdote => anecdote.id !== id ? anecdote : changedAnecdote)
+//     default:
+//       return state
+//   }
+// }
+const anecdoteSlice = createSlice({
+  name: 'anecdotes',
+  initialState,
+  reducers: {
+    createAnecdote(state, action) {
+      const content = action.payload
+      state.push({
+        content,
+        votes: getId(),
+        id: getId(),
+      })
+    },
+    voteAnecdoteOf(state, action) {
+      const id = action.payload
       const anecdoteToVote = state.find(a => a.id === id)
       const changedAnecdote = {
         ...anecdoteToVote,
         votes: Number(anecdoteToVote.votes) + 1
       }
       return state.map(anecdote => anecdote.id !== id ? anecdote : changedAnecdote)
-    default:
-      return state
-  }
-}
+    }
+  },
+})
 
-export default anecdotReducer
+export const { createAnecdote, voteAnecdoteOf } = anecdoteSlice.actions
+export default anecdoteSlice.reducer

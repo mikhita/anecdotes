@@ -19,9 +19,9 @@ const AnecdoteList = () =>{
   });
 
 
-  const vote = (id, content) => { // Add 'content' parameter
+  const vote = (id, content) => { 
     dispatch(voteAnecdoteOf(id));
-    dispatch(setNotification(`You voted for an anecdote: ${content}`)); // Include content in the notification message
+    dispatch(setNotification(`You voted for an anecdote: ${content}`)); 
     setTimeout(() => {
       dispatch(removeNotification());
     }, 5000);

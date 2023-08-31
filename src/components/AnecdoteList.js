@@ -32,6 +32,7 @@ const AnecdoteList = () =>{
   return(
     <>
     <Notification notification={notification} />
+    <div style={{paddingTop: "60px"}}>
     {filteredByVotesNumberAnecdotes.map(anecdote =>
       <div key={anecdote.id}>
         <div>
@@ -43,6 +44,7 @@ const AnecdoteList = () =>{
         </div>
       </div>
     )}
+    </div>
     </>
   )
 }

@@ -10,7 +10,8 @@ const Notification = () => {
     border: 'solid black',
     color: 'green',
     padding: 10,
-    borderWidth: 1
+    borderWidth: 1,
+    position: "absolute"
   }
   return (
     <div style={style}>

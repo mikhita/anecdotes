@@ -100,15 +100,15 @@ const anecdoteSlice = createSlice({
     //   // })
     //   state.push(action.payload)
     // },
-    voteAnecdoteOf(state, action) {
-      const id = action.payload
-      const anecdoteToVote = state.find(a => a.id === id)
-      const changedAnecdote = {
-        ...anecdoteToVote,
-        votes: Number(anecdoteToVote.votes) + 1
-      }
-      return state.map(anecdote => anecdote.id !== id ? anecdote : changedAnecdote)   
-    },
+    // voteAnecdoteOf(state, action) {
+    //   const id = action.payload
+    //   const anecdoteToVote = state.find(a => a.id === id)
+    //   const changedAnecdote = {
+    //     ...anecdoteToVote,
+    //     votes: Number(anecdoteToVote.votes) + 1
+    //   }
+    //   return state.map(anecdote => anecdote.id !== id ? anecdote : changedAnecdote)   
+    // },
     appendAnecdote(state, action) {
       state.push(action.payload)
     },
